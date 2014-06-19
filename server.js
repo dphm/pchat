@@ -22,12 +22,26 @@
    */
 
   var io = require('socket.io')(server);
+  var randomName = require('./util/randomName');
+  var names = {};
 
   io.on('connection', function(socket) {
-    console.log(socket.id + ' has connected.');
+    names[socket.id] = getRandomName(socket.id);
+    console.log(names[socket.id] + ' has connected.');
 
     socket.on('disconnect', function() {
-      console.log(socket.id + ' has disconnected.');
+      console.log(names[socket.id] + ' has disconnected.');
     });
   });
+
+  function getRandomName(id) {
+    var name = id;
+    
+    do {
+      name = randomName.generate();
+    } while (name in Object.keys(names));
+    
+    return name;
+  }
+
 })(this);
