@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang='en'>
+  <head>
+    <title>pchat</title>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/style.css' />
+  </head>
+
+  <body>
+    <div id='content'>
+      <h1>chat</h1>
+      <ul>
+        <li>Eventually</li>
+        <li>You</li>
+        <li>Will</li>
+        <li>Be</li>
+        <li>Able</li>
+        <li>To</li>
+        <li>Post</li>
+        <li>Messages</li>
+      </ul>
+      <form id='message-form'>
+        <input id='message-text' type='text' />
+        <button form='message-form' type='submit'>Send</button>
+      </form>
+    </div>
+
+    <script src='/socket.io/socket.io.js'></script>
+    <script>
+      var socket = io('http://localhost/');
+    </script>
+  </body>
+</html>
