@@ -55,7 +55,7 @@
     'zebra', 'zephyr', 'zinc', 'zipper', 'zoo'
   ];
 
-  exports.generate = function randomName() {
+  exports.generate = function () {
     var i = Math.floor(Math.random() * adjectives.length);
     var j = Math.floor(Math.random() * nouns.length);
     return '' + adjectives[i] + '-' + nouns[j];
