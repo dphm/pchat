@@ -7,8 +7,9 @@
   var app     = express();
   var server  = require('http').Server(app);
 
-  server.listen(3000, function() {
-    console.log("Listening at localhost:3000...");
+  var port = Number(process.env.PORT) || 5000;
+  server.listen(port, function() {
+    console.log("Listening on " + port);
   });
 
   app.get('/', function(req, res) {
