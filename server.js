@@ -16,18 +16,21 @@
   });
 
   app.use(express.static(__dirname + '/public'));
+  app.use(express.static(__dirname + '/lib'));
 
   /**
    * PChat server
    */
 
   var io = require('socket.io')(server);
-  var randomName = require('./lib/randomName');
+  var randomName = require(__dirname + '/lib/randomName');
   var names = {};
 
   io.on('connection', function(socket) {
     names[socket.id] = getRandomName(socket.id);
     console.log(names[socket.id] + ' has connected.');
+
+    handleMessageBroadcasting(socket);
 
     socket.on('disconnect', function() {
       console.log(names[socket.id] + ' has disconnected.');
@@ -40,6 +43,13 @@
       name = randomName.generate();
     } while (name in Object.keys(names));
     return name;
+  }
+
+  function handleMessageBroadcasting(socket) {
+    socket.on('message', function(message) {
+      console.log(names[socket.id] + ': ' + message.text);
+      io.emit('message', {text: names[socket.id] + ': ' + message.text});
+    });
   }
 
 })(this);

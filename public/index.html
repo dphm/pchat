@@ -7,17 +7,11 @@
 
   <body>
     <div id='content'>
-      <h1>chat</h1>
-      <ul>
-        <li>Eventually</li>
-        <li>You</li>
-        <li>Will</li>
-        <li>Be</li>
-        <li>Able</li>
-        <li>To</li>
-        <li>Post</li>
-        <li>Messages</li>
-      </ul>
+      <h1><strike>p</strike>chat</h1>
+      <div id='messages'>
+        <ul id='message-list'>
+        </ul>
+      </div>
       <form id='message-form'>
         <input id='message-text' type='text' />
         <button form='message-form' type='submit'>Send</button>
@@ -25,8 +19,6 @@
     </div>
 
     <script src='/socket.io/socket.io.js'></script>
-    <script>
-      var socket = io('http://localhost/');
-    </script>
+    <script src='/chat.js'></script>
   </body>
 </html>
