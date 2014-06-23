@@ -36,11 +36,9 @@
 
   function getRandomName(id) {
     var name = id;
-    
     do {
       name = randomName.generate();
     } while (name in Object.keys(names));
-    
     return name;
   }
 
