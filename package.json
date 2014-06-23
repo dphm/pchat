@@ -4,6 +4,7 @@
   "description": "a paintchat application",
   "dependencies": {
     "express": "^4.4.3",
+    "logfmt": "^1.1.2",
     "socket.io": "^1.0.5"
   },
   "engines": {
