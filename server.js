@@ -22,7 +22,7 @@
    */
 
   var io = require('socket.io')(server);
-  var randomName = require('./util/randomName');
+  var randomName = require('./lib/randomName');
   var names = {};
 
   io.on('connection', function(socket) {
