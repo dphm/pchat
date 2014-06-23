@@ -3,9 +3,9 @@
    * HTTP server
    */
 
-  var express  = require('express');
-  var app      = express();
-  var server   = require('http').Server(app);
+  var express = require('express');
+  var app     = express();
+  var server  = require('http').Server(app);
 
   server.listen(3000, function() {
     console.log("Listening at localhost:3000...");
