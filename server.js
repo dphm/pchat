@@ -29,7 +29,7 @@ var names = {};
 io.on('connection', function(socket) {
   names[socket.id] = getRandomName();
   io.emit('message', {
-    text: names[socket.id] + ' has connected.',
+    text: '<strong>' + names[socket.id] + '</strong> has connected.',
     sender: 'system'
   });
 
@@ -37,7 +37,7 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     io.emit('message', {
-      text: names[socket.id] + ' has disconnected.',
+      text: '<strong>' + names[socket.id] + '</strong> has disconnected.',
       sender: 'system'
     });
 
