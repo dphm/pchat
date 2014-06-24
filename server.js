@@ -28,12 +28,13 @@ var names = {};
 
 io.on('connection', function(socket) {
   names[socket.id] = getRandomName(socket.id);
-  console.log(names[socket.id] + ' has connected.');
+  io.emit('message', {text: names[socket.id] + ' has connected.'});
 
   handleMessageBroadcasting(socket);
 
   socket.on('disconnect', function() {
-    console.log(names[socket.id] + ' has disconnected.');
+    io.emit('message', {text: names[socket.id] + ' has disconnected.'});
+    delete names[socket.id];
   });
 });
 
