@@ -27,19 +27,25 @@ var randomName = require(__dirname + '/lib/randomName');
 var names = {};
 
 io.on('connection', function(socket) {
-  names[socket.id] = getRandomName(socket.id);
-  io.emit('message', {text: names[socket.id] + ' has connected.'});
+  names[socket.id] = getRandomName();
+  io.emit('message', {
+    text: names[socket.id] + ' has connected.',
+    sender: 'system'
+  });
 
   handleMessageBroadcasting(socket);
 
   socket.on('disconnect', function() {
-    io.emit('message', {text: names[socket.id] + ' has disconnected.'});
+    io.emit('message', {
+      text: names[socket.id] + ' has disconnected.',
+      sender: 'system'
+    });
+
     delete names[socket.id];
   });
 });
 
-function getRandomName(id) {
-  var name = id;
+function getRandomName() {
   do {
     name = randomName.generate();
   } while (name in Object.keys(names));
@@ -48,7 +54,13 @@ function getRandomName(id) {
 
 function handleMessageBroadcasting(socket) {
   socket.on('message', function(message) {
-    console.log(names[socket.id] + ': ' + message.text);
-    io.emit('message', {text: names[socket.id] + ': ' + message.text});
+    if (message.sender == 'system') {
+      io.emit('message', message);
+    } else {
+      io.emit('message', {
+        text: message.text,
+        sender: names[socket.id]
+      });
+    }
   });
 }
